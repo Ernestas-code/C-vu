@@ -25,11 +25,8 @@ class  Student
     }
 
     public:
-    Student(string name,
-        string surname,
-        int age,
-        double funding)
-    : name(name),
+    Student(string name,string surname,int age,double funding)
+     : name(name),
     surname(surname),
     funding(funding)
     {
@@ -182,12 +179,12 @@ int main() {
         }
 
         assert(Student::getObjectCount() == 0);
-        cout << "All students destroyed correctly." << endl;
+        cout << "all students destroyed this time correctly" << endl;
         cout << "test success" << endl;
     }
     catch (const exception& e)
     {
-        cout << "Unexpected error: " << e.what() << endl;
+        cout << "error: " << e.what() << endl;
     }
 
     return 0;
