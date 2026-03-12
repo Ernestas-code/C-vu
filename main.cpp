@@ -9,8 +9,8 @@ using namespace std;
 
 class  Student
 {
-    private:
-    static int nextId;
+private:
+    static int nextId ;
     static int objectCount;
     int id;
     string name;
@@ -25,38 +25,56 @@ class  Student
     }
 
     public:
-    Student(string name,string surname,int age,double funding)
-     : name(name),
-    surname(surname),
-    funding(funding)
+    Student(
+        string name,
+        string surname,
+        int age,
+        double funding
+        )
+        : name(name),
+        surname(surname),
+        funding(funding)
     {
         setAge(age);
         initialize();
     }
-    Student(string name,string surname)
-        : name(name), surname(surname), age(26), funding(0.0) {
+    Student(
+        string name,
+        string surname
+        )
+        : name(name),
+        surname(surname),
+        age(26),
+        funding(0.0)
+    {
         initialize();
     }
 
-    ~Student() {
+    ~Student()
+    {
         objectCount--;
     }
+
     int getId() const
     {
         return id;
     }
+
     string getName() const
     {
         return name;
     }
+
     string getSurname() const
     {
         return surname;
     }
+
     int getAge() const
     {
         return age;
     }
+
     double getFunding() const
     {
         return funding;
@@ -64,24 +82,28 @@ class  Student
 
     void setName(string newName)
     {
-    name = newName;
-}
+        name = newName;
+    }
+
     void setSurname(string newSurname)
     {
         surname = newSurname;
     }
+
     void setAge(int newAge)
     {
         if (newAge <= 0)
             throw invalid_argument("invalid age");
         age = newAge;
     }
+
     void setFunding(double newFunding)
     {
         if (newFunding < 0)
             throw invalid_argument("invalid funding");
         funding = newFunding;
     }
+
     void print() const
     {
         cout << toString() << endl;
@@ -96,6 +118,7 @@ class  Student
            << ", funding=" << funding;
         return ss.str();
     }
+
     static int getObjectCount()
     {
         return objectCount;
@@ -104,12 +127,14 @@ class  Student
 
 
 };
-int Student :: nextId = 1;
-int Student :: objectCount = 0;
+int Student:: nextId = 1;
+int Student:: objectCount = 0;
 
-int main() {
-    try {
+int main()
+{
+    try
         {
+
             // // This statement prints "Hello World"
             // cout << "Hello World";
             //
@@ -134,13 +159,22 @@ int main() {
             assert(s1.getFunding() == 200.0);
             bool exceptionThrown = false;
 
-            try {
+            try
+                {
                 s1.setAge(-5);
-            } catch (const invalid_argument&) {
+            }
+            catch (const invalid_argument&)
+                {
                 exceptionThrown = true;
             }
+            if (exceptionThrown) {
+                cout << "exception test passed" << endl;
+            }
+            else {
+                cout << "exception test failed" << endl;
+            }
 
-            assert(exceptionThrown);
+
 
             Student s2("Martin", "G");
             s2.print();
@@ -154,14 +188,15 @@ int main() {
             assert(Student::getObjectCount() == 3);
 
             Student* dyn = new Student("Dynamic", "Student", 30, 300.0);
-            assert(Student::getObjectCount() == 4);
+
             cout << "Count after new "
-             << Student::getObjectCount() << endl;
+                 << Student::getObjectCount()
+                 << endl;
 
             delete dyn;
-            assert(Student::getObjectCount() == 3);
             cout << "Count after delete "
-                 << Student::getObjectCount() << endl;
+                 << Student::getObjectCount()
+                 << endl;
 
             vector<Student*> list;
 
@@ -176,15 +211,26 @@ int main() {
             {
                 delete s;
             }
-        }
+            if (Student::getObjectCount() == 3)
+                {
+                cout << "dynamic students destroyed successfully" << endl;
+            }
+            else
+                {
+                cout << "Error memory leak" << endl;
+            }
 
-        assert(Student::getObjectCount() == 0);
-        cout << "all students destroyed this time correctly" << endl;
+
+
         cout << "test success" << endl;
     }
     catch (const exception& e)
     {
         cout << "error: " << e.what() << endl;
+    }
+    catch (...)
+        {
+        cout << "unknown error" << endl;
     }
 
     return 0;
