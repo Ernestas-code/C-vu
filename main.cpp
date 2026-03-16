@@ -26,26 +26,27 @@ private:
 
     public:
     Student(
-        string name,
-        string surname,
-        int age,
-        double funding
-        )
-        : name(name),
-        surname(surname),
-        funding(funding)
+    string name,
+    string surname,
+    int age,
+    double funding
+)
+    : name(name),
+      surname(surname),
+      funding(funding)
     {
         setAge(age);
         initialize();
     }
+
     Student(
         string name,
         string surname
-        )
+    )
         : name(name),
-        surname(surname),
-        age(26),
-        funding(0.0)
+          surname(surname),
+          age(26),
+          funding(0.0)
     {
         initialize();
     }
@@ -92,18 +93,22 @@ private:
 
     void setAge(int newAge)
     {
-        if (newAge <= 0)
+        if(newAge > 0)
+            age = newAge;
+        else
             throw invalid_argument("invalid age");
-        age = newAge;
     }
 
-    void setFunding(double newFunding)
-    {
-        if (newFunding < 0)
+    void setFunding(double newFunding) {
+        if (newFunding >= 0)
+        {
+            funding = newFunding;
+        }
+        else
+        {
             throw invalid_argument("invalid funding");
-        funding = newFunding;
+        }
     }
-
     void print() const
     {
         cout << toString() << endl;
@@ -127,8 +132,8 @@ private:
 
 
 };
-int Student:: nextId = 1;
-int Student:: objectCount = 0;
+int Student::nextId = 1;
+int Student::objectCount = 0;
 
 int main()
 {
@@ -211,7 +216,7 @@ int main()
             {
                 delete s;
             }
-            if (Student::getObjectCount() == 3)
+            if (Student::getObjectCount() == 0)
                 {
                 cout << "dynamic students destroyed successfully" << endl;
             }
