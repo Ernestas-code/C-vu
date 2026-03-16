@@ -42,7 +42,7 @@ private:
     Student(
         string name,
         string surname
-    )
+)
         : name(name),
           surname(surname),
           age(26),
